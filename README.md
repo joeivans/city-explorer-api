@@ -1,4 +1,4 @@
-# City Explorer
+# City Explorer API
 
 **Author**: Joe Ivans, Student, Code Fellows Seattle
 **Version**: 1.0.0
