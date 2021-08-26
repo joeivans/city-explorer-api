@@ -1,0 +1,67 @@
+{
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "strict": [
+      "warn",
+      "global"
+    ],
+    "eol-last": "error",
+    "eqeqeq": [
+      "error",
+      "always"
+    ],
+    "indent": [
+      "off",
+      2
+    ],
+    "new-cap": "error",
+    "no-console": "off",
+    "no-multi-spaces": [
+      "off",
+      {
+        "exceptions": {
+          "VariableDeclarator": true
+        }
+      }
+    ],
+    "no-new-func": "error",
+    "no-redeclare": [
+      "error",
+      {
+        "builtinGlobals": true
+      }
+    ],
+    "no-setter-return": "off",
+    "no-template-curly-in-string": "error",
+    "no-trailing-spaces": "warn",
+    "no-undefined": "off",
+    "prefer-const": "error",
+    "prefer-destructuring": [
+      "warn",
+      {
+        "array": true,
+        "object": true
+      },
+      {
+        "enforceForRenamedProperties": true
+      }
+    ],
+    "quotes": [
+      "warn",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "semi": "error"
+  }
+}
