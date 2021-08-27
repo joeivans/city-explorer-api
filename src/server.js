@@ -1,50 +1,44 @@
+/*
+ * Joe Ivans, student, Code Fellows Seattle
+ */
+
 'use strict';
 
+/* ----------------------------------------------------------------
+ * Port Config
+ * --------------------------------------------------------------*/
+require('dotenv').config();
+const PORT = process.env.PORT || -1;
+
+/* ----------------------------------------------------------------
+ * Init Express Server
+ * --------------------------------------------------------------*/
 const express = require('express');
 const cors = require('cors');
-const {response} = require('express');
-require('dotenv').config();
 const app = express();
-const PORT = process.env.PORT;
+app.use(cors({
+  origin: [
+    'http://localhost',
+    '.netlify.com',
+    '.heroku.com']
+}));
+app.disable('x-powered-by');
 
-app.use(cors());
+/* ----------------------------------------------------------------
+ * Route Controller Imports
+ * --------------------------------------------------------------*/
+const healthCheckController = require('./controllers/healthCheck');
+const photosController = require('./controllers/photosController');
+const error400Controller = require('./controllers/Erorr400Controller');
 
-app.get('/health-check', (req, res) => {
-  console.log(Date.now());
-  res.send('healthy');
-});
+/* ----------------------------------------------------------------
+ * Routes
+ * --------------------------------------------------------------*/
+app.get('/health-check', healthCheckController);
+app.get('/photo', photosController);
+app.get('*', error400Controller);
 
-app.get('/photo', getPhotos);
-
-
-async function getPhotos(req, res) {
-  const searchQuery = req.query.query;
-
-  const url = `https://api.unsplash.com/photos/?client_id=${process.env.UNSPLASH_PRIVATE_KEY}&query=${searchQuery}`;
-
-  try {
-    const response = await axios.get(url);
-    const photoArray = response.data.map(photo => new Photo(photo));
-    res.send(photoArray);
-  } catch (error) {
-    console.error('Something bad happened on my end. Sorry!', error);
-    response.status(500).send('server error');
-  }
-
-}
-
-class Photo {
-  constructor(obj) {
-    this.img_url = obj.urls.regular;
-    this.original_image = obj.links.self;
-    this.photographer = obj.user.name;
-  }
-}
-
-app.get('*', notFound);
-
-function notFound(request, response) {
-  response.status(404).send('I can\'t find it.');
-}
-
+/* ----------------------------------------------------------------
+ * Main
+ * --------------------------------------------------------------*/
 app.listen(PORT, () => console.log(`... on port ${PORT}`));
