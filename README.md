@@ -24,7 +24,7 @@ This is a web API server application that uses the web request/response cycle to
 interface with clients and other servers to query data and provide a client with
 high-quality results.
 
-![Architecture](./docs/images/Lab07.png)
+![Architecture](./docs/images/Lab%2010%20-%20City%20Explorer%20-%20DFD.svg)
 
 Dependencies:
 - Cors
